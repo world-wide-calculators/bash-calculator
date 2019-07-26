@@ -2,6 +2,8 @@ retry="y"
 
 while [ $retry = "y" ]
 do
+	echo_out=1
+	
 	echo "Input first number: "
 	read n1
 	
@@ -26,11 +28,19 @@ do
 	fi
 	if [ $op = "/" ]
 	then
-		ans=$((n1/n2))
+		if [ $n2 = 0 ]
+		then
+			echo "Can't divide by zero!"
+			echo_out=0
+		else
+			ans=$((n1/n2))
+		fi
 	fi
 	
-	echo "$n1 $op $n2 = $ans"
-	
+	if [ $echo_out = 1 ]
+	then
+		echo "$n1 $op $n2 = $ans"
+	fi
 	
 	echo "Retry? (y/n)"
 	read retry
